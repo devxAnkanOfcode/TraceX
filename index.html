@@ -1,49 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TRACE//X — Blockchain Fraud Intelligence</title>
-<meta name="description" content="TRACE//X — real-time identification of fraud-linked cryptocurrency exchanges from victim-reported wallet addresses.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>TRACE//X — Blockchain Fraud Intelligence</title>
+    <meta name="description"
+        content="TRACE//X — real-time identification of fraud-linked cryptocurrency exchanges from victim-reported wallet addresses.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
-<div id="preloader"><div class="loadbox"><div class="loadmark">INITIALIZING TRACE//X</div><div class="loadbar"></div></div></div>
-<nav id="navbar"><div class="container nav-inner"><a class="logo" href="#hero">TRACE<span>//</span><b>X</b></a><ul id="nav-links"><li><a class="active" href="#hero">Overview</a></li><li><a href="#report">Investigate</a></li><li><a href="#results">Trace</a></li><li><a href="#features">Capabilities</a></li></ul><button id="nav-toggle" aria-label="Open menu"><span class="hamb"><span></span><span></span><span></span></span></button></div></nav>
-<div id="mobile-menu"><a href="#hero">Overview</a><a href="#report">Investigate</a><a href="#results">Trace</a><a href="#features">Capabilities</a></div>
-<main>
-<section id="hero"><div class="hero-bg"><div class="grid"></div><div id="webgl"></div></div><div class="container hero-content reveal"><div class="eyebrow">BLOCKCHAIN FRAUD INTELLIGENCE / 01</div><h1 class="hero-title">Follow the money.<br><em>Find the exit.</em></h1><p class="hero-sub">TRACE//X turns a victim-reported crypto wallet or transaction hash into an explainable investigation: fund flow, entity detection, exchange exposure and a real-time risk signal.</p><div class="hero-actions"><a class="btn primary" href="#report">START INVESTIGATION →</a><button class="btn" id="demoBtn">LOAD DEMO CASE</button></div><div class="status"><i class="dot"></i> ANALYTICS ENGINE ONLINE · DEMO MODE</div></div></section>
-<section id="report"><div class="container"><div class="section-head reveal"><div><div class="label">01 / INPUT</div><h2 class="section-title">Report a suspect.</h2></div><p class="section-note">Victim-facing intake designed for fast reporting. Enter a wallet address or transaction hash, select the chain, and run the analysis.</p></div><div class="report-grid"><div class="card reveal"><div class="label">VICTIM REPORT</div><h3>Investigation parameters</h3><form id="scanForm"><div class="field"><label>Suspect wallet / transaction hash</label><input id="wallet" required placeholder="0x71C... or transaction hash" autocomplete="off"></div><div class="form-row"><div class="field"><label>Network</label><select id="chain"><option>Ethereum</option><option>BNB Smart Chain</option><option>Polygon</option><option>Bitcoin</option></select></div><div class="field"><label>Amount lost</label><input id="amount" placeholder="e.g. 2.45 ETH"></div></div><div class="field"><label>Incident description</label><textarea id="description" placeholder="Optional context: fake investment platform, impersonation, phishing, etc."></textarea></div><button class="btn primary" type="submit" style="width:100%">RUN BLOCKCHAIN ANALYSIS ↗</button></form><div class="quick"><button class="chip sample" data-wallet="0x71c9...9F21">SAMPLE / EOA</button><button class="chip sample" data-wallet="0x9b7a...C441">SAMPLE / EXCHANGE</button><button class="chip sample" data-wallet="0x4a12...77D0">SAMPLE / HIGH RISK</button></div></div>
-<div class="card scan-card reveal"><div><div class="label">LIVE SIGNAL</div><h3>Pre-analysis risk profile</h3><div class="score"><div class="ring"><div class="score-num"><strong id="score">78</strong><span>/ 100</span></div></div><div class="risk-copy"><h4 id="riskTitle">HIGH RISK</h4><p id="riskText">Multiple-hop movement and exchange exposure detected in the demo intelligence layer.</p></div></div><div class="meter"><i id="meter"></i></div></div><div class="mini-list"><div class="mini-row"><span>Wallet type</span><b id="walletType">EOA</b></div><div class="mini-row"><span>Hops observed</span><b id="hops">7</b></div><div class="mini-row"><span>Entity match</span><b id="entityMatch">Exchange</b></div><div class="mini-row"><span>Confidence</span><b id="confidence">91%</b></div></div></div></div></div></section>
-<section id="results"><div class="container"><div class="section-head"><div><div class="label">02 / TRACE</div><h2 class="section-title">Investigation result.</h2></div><p class="section-note">A demo-ready investigation view. In production, these panels connect to indexed blockchain data, entity labels and intelligence feeds.</p></div><div class="result-layout"><div class="card"><div class="risk-banner"><div><small>AI / RULE-BASED RISK SIGNAL</small><strong id="resultScore">78</strong></div><span class="red">● HIGH</span></div><div class="entity-tags"><span class="tag red">SUSPECT</span><span class="tag cyan">EOA</span><span class="tag">EXCHANGE EXPOSURE</span><span class="tag">MULTI-HOP</span></div><div style="margin-top:25px" class="mini-list"><div class="mini-row"><span>First seen</span><b>2026-09-16 18:42 UTC</b></div><div class="mini-row"><span>Last movement</span><b>12 min ago</b></div><div class="mini-row"><span>Known entities</span><b>3 matches</b></div><div class="mini-row"><span>Chain</span><b id="resultChain">Ethereum</b></div></div></div><div class="card graph"><div class="graph-grid"></div><svg viewBox="0 0 800 390" preserveAspectRatio="none"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#55d6ff"/></marker></defs><path d="M115 190 C220 90 250 85 335 100" fill="none" stroke="#55d6ff" stroke-width="2" marker-end="url(#arrow)"/><path d="M115 205 C230 245 270 270 340 275" fill="none" stroke="#55d6ff" stroke-width="2" marker-end="url(#arrow)"/><path d="M390 105 C500 100 555 150 660 175" fill="none" stroke="#f0a24b" stroke-width="2" marker-end="url(#arrow)"/><path d="M390 285 C510 300 560 265 665 245" fill="none" stroke="#ff5e6c" stroke-width="2" marker-end="url(#arrow)"/><circle cx="115" cy="198" r="5" fill="#ff5e6c"/><circle cx="365" cy="102" r="5" fill="#55d6ff"/><circle cx="365" cy="280" r="5" fill="#55d6ff"/><circle cx="680" cy="180" r="6" fill="#f0a24b"/><circle cx="680" cy="240" r="6" fill="#ff5e6c"/></svg><div class="node n1 hot"><strong>VICTIM REPORT</strong><small>0x71c9...9F21</small></div><div class="node n2"><strong>HOP 03</strong><small>0xA81...D90C</small></div><div class="node n3"><strong>HOP 05</strong><small>0x22F...88AE</small></div><div class="node n4"><strong>DEX ROUTER</strong><small>Uniswap-like</small></div><div class="node n5 hot"><strong>EXCHANGE</strong><small>Entity #EX-204</small></div></div></div><div class="card" style="margin-top:22px"><div class="label">TRANSACTION TIMELINE</div><h3 style="margin:7px 0 18px">Observed fund movements</h3><div class="table-wrap"><table class="tx-table"><thead><tr><th>TIME</th><th>FROM</th><th>TO</th><th>ASSET</th><th>VALUE</th><th>TYPE</th></tr></thead><tbody><tr><td>18:42:11</td><td>0x71c9...9F21</td><td>0xA81...D90C</td><td>ETH</td><td>2.45</td><td class="red">SUSPECT</td></tr><tr><td>18:47:02</td><td>0xA81...D90C</td><td>0x22F...88AE</td><td>USDT</td><td>5,930</td><td class="amber">HOP</td></tr><tr><td>18:51:36</td><td>0x22F...88AE</td><td>DEX Router</td><td>USDT</td><td>5,900</td><td class="amber">SWAP</td></tr><tr><td>18:53:09</td><td>DEX Router</td><td>EX-204</td><td>USDC</td><td>5,872</td><td class="green">ENTITY MATCH</td></tr></tbody></table></div></div></div></section>
-<section id="features"><div class="container"><div class="section-head reveal"><div><div class="label">03 / CAPABILITIES</div><h2 class="section-title">Built for the demo.</h2></div><p class="section-note">Every block is intentionally judge-friendly: input → evidence → graph → intelligence → explainable signal.</p></div><div class="feature-grid reveal"><div class="feature"><span class="num">01</span><h3>Wallet analysis</h3><p>EOA vs contract detection, activity snapshot and transaction metadata.</p></div><div class="feature"><span class="num">02</span><h3>Multi-hop tracing</h3><p>Follow funds across intermediate wallets, swaps, bridges and counterparties.</p></div><div class="feature"><span class="num">03</span><h3>Entity detection</h3><p>Surface exchange, mixer, bridge and DEX exposure from intelligence labels.</p></div><div class="feature"><span class="num">04</span><h3>Risk scoring</h3><p>Combine transaction patterns and intelligence into a 0–100 explainable signal.</p></div><div class="feature"><span class="num">05</span><h3>Fraud intelligence</h3><p>Keep known suspicious wallets and linked entities in an investigation layer.</p></div><div class="feature"><span class="num">06</span><h3>Demo-first UX</h3><p>Fast reporting, responsive dashboard, sample cases and clear evidence trails.</p></div></div></div></section>
-<section id="about"><div class="container"><div class="about-grid"><div class="about-copy reveal"><div class="label">THE PROBLEM</div><h2 class="section-title" style="margin:10px 0 25px">Crypto fraud moves faster than manual investigation.</h2><p>TRACE//X is a prototype for turning a victim's first piece of evidence — a suspect wallet or transaction hash — into a structured blockchain investigation.</p><p>The interface is designed to make complex on-chain movement understandable during a live hackathon demo, while leaving clear seams for real blockchain APIs, indexing services, entity datasets and an AI scoring layer.</p></div><dl class="spec-list reveal"><div class="spec-row"><dt>Project</dt><dd>TRACE//X</dd></div><div class="spec-row"><dt>Domain</dt><dd>Blockchain / Security</dd></div><div class="spec-row"><dt>Mode</dt><dd>Interactive demo</dd></div><div class="spec-row"><dt>Frontend</dt><dd>HTML / CSS / JS / Three.js</dd></div><div class="spec-row"><dt>Backend hook</dt><dd>REST / blockchain indexer</dd></div><div class="spec-row"><dt>Status</dt><dd class="green">Prototype ready</dd></div></dl></div></div></section>
-</main><footer><div class="container footer-row"><span>TRACE//X · HACKATHON PROTOTYPE · 2026</span><span>Built by Ankan &amp; team · <a href="#hero">BACK TO TOP ↑</a></span></div></footer><div class="toast" id="toast"></div>
-<script>
-(function(){
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-window.addEventListener('load',()=>setTimeout(()=>$('#preloader').style.display='none',650));
-window.addEventListener('scroll',()=>$('#navbar').classList.toggle('scrolled',scrollY>50));
-$('#nav-toggle').onclick=()=>document.body.classList.toggle('mobile-open');
-$$('#mobile-menu a').forEach(a=>a.onclick=()=>document.body.classList.remove('mobile-open'));
-function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200)}
-const samples={
- '0x71c9...9F21':{score:78,type:'EOA',hops:7,entity:'Exchange',conf:'91%',risk:'HIGH RISK'},
- '0x9b7a...C441':{score:61,type:'EOA',hops:4,entity:'Exchange',conf:'84%',risk:'ELEVATED'},
- '0x4a12...77D0':{score:93,type:'Contract',hops:11,entity:'Mixer / Bridge',conf:'96%',risk:'CRITICAL'}
-};
-function apply(d){$('#score').textContent=d.score;$('#resultScore').textContent=d.score;$('#walletType').textContent=d.type;$('#hops').textContent=d.hops;$('#entityMatch').textContent=d.entity;$('#confidence').textContent=d.conf;$('#riskTitle').textContent=d.risk;$('#meter').style.width=d.score+'%';$('#resultChain').textContent=$('#chain').value;}
-$$('.sample').forEach(b=>b.onclick=()=>{const w=b.dataset.wallet;$('#wallet').value=w;apply(samples[w]);toast('Sample investigation loaded')});
-$('#demoBtn').onclick=()=>{$('#wallet').value='0x71c9...9F21';$('#amount').value='2.45 ETH';$('#description').value='Victim reports funds sent to a suspected investment scam wallet.';apply(samples['0x71c9...9F21']);$('#report').scrollIntoView({behavior:'smooth'});toast('Demo case loaded')};
-$('#scanForm').onsubmit=e=>{e.preventDefault();const raw=$('#wallet').value.trim();let d=samples[raw]||{score:Math.floor(45+Math.random()*48),type:raw.toLowerCase().includes('contract')?'Contract':'EOA',hops:Math.floor(2+Math.random()*10),entity:'Unknown / pending',conf:Math.floor(72+Math.random()*24)+'%',risk:'ANALYSIS READY'};apply(d);$('#results').style.display='block';setTimeout(()=>$('#results').scrollIntoView({behavior:'smooth'}),100);toast('Blockchain analysis completed · demo data')};
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});$$('.reveal').forEach(x=>io.observe(x));
-// lightweight Three.js hero object
-if(window.THREE){const c=$('#webgl'),scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,100);cam.position.z=5;const r=new THREE.WebGLRenderer({alpha:true,antialias:true});r.setPixelRatio(Math.min(devicePixelRatio,1.7));r.setSize(innerWidth,innerHeight);c.appendChild(r.domElement);const g=new THREE.Group();scene.add(g);const geo=new THREE.IcosahedronGeometry(1.35,1);const mat=new THREE.MeshBasicMaterial({color:0x55d6ff,wireframe:true,transparent:true,opacity:.28});const mesh=new THREE.Mesh(geo,mat);g.add(mesh);const inner=new THREE.Mesh(new THREE.IcosahedronGeometry(.72,1),new THREE.MeshBasicMaterial({color:0xf0a24b,wireframe:true,transparent:true,opacity:.18}));g.add(inner);const pts=new THREE.Points(new THREE.BufferGeometry().setFromPoints(Array.from({length:180},()=>new THREE.Vector3((Math.random()-.5)*7,(Math.random()-.5)*7,(Math.random()-.5)*4))),new THREE.PointsMaterial({color:0x55d6ff,size:.018,transparent:true,opacity:.45}));scene.add(pts);let mx=0,my=0;addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*.7;my=(e.clientY/innerHeight-.5)*.35});function loop(){requestAnimationFrame(loop);g.rotation.y+=.0025;g.rotation.x+=(my-g.rotation.x)*.01;g.rotation.y+=(mx-g.rotation.y)*.01;inner.rotation.z-=.004;pts.rotation.y-=.0005;r.render(scene,cam)}loop();addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();r.setSize(innerWidth,innerHeight)})}
-})();
-</script></body></html>
+    <div id="preloader">
+        <div class="loadbox">
+            <div class="loadmark">INITIALIZING TRACE//X</div>
+            <div class="loadbar"></div>
+        </div>
+    </div>
+    <nav id="navbar">
+        <div class="container nav-inner"><a class="logo" href="#hero">Trace<span>//</span><b>X</b></a>
+            <ul id="nav-links">
+                <li><a class="active" href="#hero">Overview</a></li>
+                <li><a href="#report">Investigate</a></li>
+                <li><a href="#results">Trace</a></li>
+                <li><a href="#features">Capabilities</a></li>
+            </ul><button id="nav-toggle" aria-label="Open menu"><span
+                    class="hamb"><span></span><span></span><span></span></span></button>
+        </div>
+    </nav>
+    <div id="mobile-menu"><a href="#hero">Overview</a><a href="#report">Investigate</a><a href="#results">Trace</a><a
+            href="#features">Capabilities</a></div>
+    <main>
+        <section id="hero">
+            <div class="hero-bg">
+                <div class="grid"></div>
+                <div id="webgl"></div>
+            </div>
+            <div class="container hero-content reveal">
+                <div class="eyebrow">BLOCKCHAIN FRAUD INTELLIGENCE / 01</div>
+                <h1 class="hero-title">Follow the money.<br><em>Find the exit.</em></h1>
+                <p class="hero-sub">TRACE//X turns a victim-reported crypto wallet or transaction hash into an
+                    explainable investigation: fund flow, entity detection, exchange exposure and a real-time risk
+                    signal.</p>
+                <div class="hero-actions"><a class="btn primary" href="#report">START INVESTIGATION →</a><button
+                        class="btn" id="demoBtn">LOAD DEMO CASE</button></div>
+                <div class="status"><i class="dot"></i> ANALYTICS ENGINE ONLINE · DEMO MODE</div>
+            </div>
+        </section>
+        <section id="report">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="label">01 / INPUT</div>
+                        <h2 class="section-title">Report a suspect.</h2>
+                    </div>
+                    <p class="section-note">Victim-facing intake designed for fast reporting. Enter a wallet address or
+                        transaction hash, select the chain, and run the analysis.</p>
+                </div>
+                <div class="report-grid">
+                    <div class="card reveal">
+                        <div class="label">VICTIM REPORT</div>
+                        <h3>Investigation parameters</h3>
+                        <form id="scanForm">
+                            <div class="field"><label>Suspect wallet / transaction hash</label><input id="wallet"
+                                    required placeholder="0x71C... or transaction hash" autocomplete="off"></div>
+                            <div class="form-row">
+                                <div class="field"><label>Network</label><select id="chain">
+                                        <option>Ethereum</option>
+                                        <option>BNB Smart Chain</option>
+                                        <option>Polygon</option>
+                                        <option>Bitcoin</option>
+                                    </select></div>
+                                <div class="field"><label>Amount lost</label><input id="amount"
+                                        placeholder="e.g. 2.45 ETH"></div>
+                            </div>
+                            <div class="field"><label>Incident description</label><textarea id="description"
+                                    placeholder="Optional context: fake investment platform, impersonation, phishing, etc."></textarea>
+                            </div><button class="btn primary" type="submit" style="width:100%">RUN BLOCKCHAIN ANALYSIS
+                                ↗</button>
+                        </form>
+                        <div class="quick"><button class="chip sample" data-wallet="0x71c9...9F21">SAMPLE /
+                                EOA</button><button class="chip sample" data-wallet="0x9b7a...C441">SAMPLE /
+                                EXCHANGE</button><button class="chip sample" data-wallet="0x4a12...77D0">SAMPLE / HIGH
+                                RISK</button></div>
+                    </div>
+                    <div class="card scan-card reveal">
+                        <div>
+                            <div class="label">LIVE SIGNAL</div>
+                            <h3>Pre-analysis risk profile</h3>
+                            <div class="score">
+                                <div class="ring">
+                                    <div class="score-num"><strong id="score">78</strong><span>/ 100</span></div>
+                                </div>
+                                <div class="risk-copy">
+                                    <h4 id="riskTitle">HIGH RISK</h4>
+                                    <p id="riskText">Multiple-hop movement and exchange exposure detected in the demo
+                                        intelligence layer.</p>
+                                </div>
+                            </div>
+                            <div class="meter"><i id="meter"></i></div>
+                        </div>
+                        <div class="mini-list">
+                            <div class="mini-row"><span>Wallet type</span><b id="walletType">EOA</b></div>
+                            <div class="mini-row"><span>Hops observed</span><b id="hops">7</b></div>
+                            <div class="mini-row"><span>Entity match</span><b id="entityMatch">Exchange</b></div>
+                            <div class="mini-row"><span>Confidence</span><b id="confidence">91%</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="results">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <div class="label">02 / TRACE</div>
+                        <h2 class="section-title">Investigation result.</h2>
+                    </div>
+                    <p class="section-note">A demo-ready investigation view. In production, these panels connect to
+                        indexed blockchain data, entity labels and intelligence feeds.</p>
+                </div>
+                <div class="result-layout">
+                    <div class="card">
+                        <div class="risk-banner">
+                            <div><small>AI / RULE-BASED RISK SIGNAL</small><strong id="resultScore">78</strong></div>
+                            <span class="red">● HIGH</span>
+                        </div>
+                        <div class="entity-tags"><span class="tag red">SUSPECT</span><span
+                                class="tag cyan">EOA</span><span class="tag">EXCHANGE EXPOSURE</span><span
+                                class="tag">MULTI-HOP</span></div>
+                        <div style="margin-top:25px" class="mini-list">
+                            <div class="mini-row"><span>First seen</span><b>2026-09-16 18:42 UTC</b></div>
+                            <div class="mini-row"><span>Last movement</span><b>12 min ago</b></div>
+                            <div class="mini-row"><span>Known entities</span><b>3 matches</b></div>
+                            <div class="mini-row"><span>Chain</span><b id="resultChain">Ethereum</b></div>
+                        </div>
+                    </div>
+                    <div class="card graph">
+                        <div class="graph-grid"></div><svg viewBox="0 0 800 390" preserveAspectRatio="none">
+                            <defs>
+                                <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#55d6ff" />
+                                </marker>
+                            </defs>
+                            <path d="M115 190 C220 90 250 85 335 100" fill="none" stroke="#55d6ff" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <path d="M115 205 C230 245 270 270 340 275" fill="none" stroke="#55d6ff" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <path d="M390 105 C500 100 555 150 660 175" fill="none" stroke="#f0a24b" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <path d="M390 285 C510 300 560 265 665 245" fill="none" stroke="#ff5e6c" stroke-width="2"
+                                marker-end="url(#arrow)" />
+                            <circle cx="115" cy="198" r="5" fill="#ff5e6c" />
+                            <circle cx="365" cy="102" r="5" fill="#55d6ff" />
+                            <circle cx="365" cy="280" r="5" fill="#55d6ff" />
+                            <circle cx="680" cy="180" r="6" fill="#f0a24b" />
+                            <circle cx="680" cy="240" r="6" fill="#ff5e6c" />
+                        </svg>
+                        <div class="node n1 hot"><strong>VICTIM REPORT</strong><small>0x71c9...9F21</small></div>
+                        <div class="node n2"><strong>HOP 03</strong><small>0xA81...D90C</small></div>
+                        <div class="node n3"><strong>HOP 05</strong><small>0x22F...88AE</small></div>
+                        <div class="node n4"><strong>DEX ROUTER</strong><small>Uniswap-like</small></div>
+                        <div class="node n5 hot"><strong>EXCHANGE</strong><small>Entity #EX-204</small></div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top:22px">
+                    <div class="label">TRANSACTION TIMELINE</div>
+                    <h3 style="margin:7px 0 18px">Observed fund movements</h3>
+                    <div class="table-wrap">
+                        <table class="tx-table">
+                            <thead>
+                                <tr>
+                                    <th>TIME</th>
+                                    <th>FROM</th>
+                                    <th>TO</th>
+                                    <th>ASSET</th>
+                                    <th>VALUE</th>
+                                    <th>TYPE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>18:42:11</td>
+                                    <td>0x71c9...9F21</td>
+                                    <td>0xA81...D90C</td>
+                                    <td>ETH</td>
+                                    <td>2.45</td>
+                                    <td class="red">SUSPECT</td>
+                                </tr>
+                                <tr>
+                                    <td>18:47:02</td>
+                                    <td>0xA81...D90C</td>
+                                    <td>0x22F...88AE</td>
+                                    <td>USDT</td>
+                                    <td>5,930</td>
+                                    <td class="amber">HOP</td>
+                                </tr>
+                                <tr>
+                                    <td>18:51:36</td>
+                                    <td>0x22F...88AE</td>
+                                    <td>DEX Router</td>
+                                    <td>USDT</td>
+                                    <td>5,900</td>
+                                    <td class="amber">SWAP</td>
+                                </tr>
+                                <tr>
+                                    <td>18:53:09</td>
+                                    <td>DEX Router</td>
+                                    <td>EX-204</td>
+                                    <td>USDC</td>
+                                    <td>5,872</td>
+                                    <td class="green">ENTITY MATCH</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="label">03 / CAPABILITIES</div>
+                        <h2 class="section-title">Built for the demo.</h2>
+                    </div>
+                    <p class="section-note">Every block is intentionally judge-friendly: input → evidence → graph →
+                        intelligence → explainable signal.</p>
+                </div>
+                <div class="feature-grid reveal">
+                    <div class="feature"><span class="num">01</span>
+                        <h3>Wallet analysis</h3>
+                        <p>EOA vs contract detection, activity snapshot and transaction metadata.</p>
+                    </div>
+                    <div class="feature"><span class="num">02</span>
+                        <h3>Multi-hop tracing</h3>
+                        <p>Follow funds across intermediate wallets, swaps, bridges and counterparties.</p>
+                    </div>
+                    <div class="feature"><span class="num">03</span>
+                        <h3>Entity detection</h3>
+                        <p>Surface exchange, mixer, bridge and DEX exposure from intelligence labels.</p>
+                    </div>
+                    <div class="feature"><span class="num">04</span>
+                        <h3>Risk scoring</h3>
+                        <p>Combine transaction patterns and intelligence into a 0–100 explainable signal.</p>
+                    </div>
+                    <div class="feature"><span class="num">05</span>
+                        <h3>Fraud intelligence</h3>
+                        <p>Keep known suspicious wallets and linked entities in an investigation layer.</p>
+                    </div>
+                    <div class="feature"><span class="num">06</span>
+                        <h3>Demo-first UX</h3>
+                        <p>Fast reporting, responsive dashboard, sample cases and clear evidence trails.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-copy reveal">
+                        <div class="label">THE PROBLEM</div>
+                        <h2 class="section-title" style="margin:10px 0 25px">Crypto fraud moves faster than manual
+                            investigation.</h2>
+                        <p>TRACE//X is a prototype for turning a victim's first piece of evidence — a suspect wallet or
+                            transaction hash — into a structured blockchain investigation.</p>
+                        <p>The interface is designed to make complex on-chain movement understandable during a live
+                            hackathon demo, while leaving clear seams for real blockchain APIs, indexing services,
+                            entity datasets and an AI scoring layer.</p>
+                    </div>
+                    <dl class="spec-list reveal">
+                        <div class="spec-row">
+                            <dt>Project</dt>
+                            <dd>TRACE//X</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Domain</dt>
+                            <dd>Blockchain / Security</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Mode</dt>
+                            <dd>Interactive demo</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Frontend</dt>
+                            <dd>HTML / CSS / JS / Three.js</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Backend hook</dt>
+                            <dd>REST / blockchain indexer</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Status</dt>
+                            <dd class="green">Prototype ready</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-row"><span>TRACE//X · HACKATHON PROTOTYPE · 2026</span><span>Built by Ankan &amp;
+                team · <a href="#hero">BACK TO TOP ↑</a></span></div>
+    </footer>
+    <div class="toast" id="toast"></div>
+    <script>
+        (function () {
+            const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+            window.addEventListener('load', () => setTimeout(() => $('#preloader').style.display = 'none', 650));
+            window.addEventListener('scroll', () => $('#navbar').classList.toggle('scrolled', scrollY > 50));
+            $('#nav-toggle').onclick = () => document.body.classList.toggle('mobile-open');
+            $$('#mobile-menu a').forEach(a => a.onclick = () => document.body.classList.remove('mobile-open'));
+            function toast(t) { const x = $('#toast'); x.textContent = t; x.classList.add('show'); setTimeout(() => x.classList.remove('show'), 2200) }
+            const samples = {
+                '0x71c9...9F21': { score: 78, type: 'EOA', hops: 7, entity: 'Exchange', conf: '91%', risk: 'HIGH RISK' },
+                '0x9b7a...C441': { score: 61, type: 'EOA', hops: 4, entity: 'Exchange', conf: '84%', risk: 'ELEVATED' },
+                '0x4a12...77D0': { score: 93, type: 'Contract', hops: 11, entity: 'Mixer / Bridge', conf: '96%', risk: 'CRITICAL' }
+            };
+            function apply(d) { $('#score').textContent = d.score; $('#resultScore').textContent = d.score; $('#walletType').textContent = d.type; $('#hops').textContent = d.hops; $('#entityMatch').textContent = d.entity; $('#confidence').textContent = d.conf; $('#riskTitle').textContent = d.risk; $('#meter').style.width = d.score + '%'; $('#resultChain').textContent = $('#chain').value; }
+            $$('.sample').forEach(b => b.onclick = () => { const w = b.dataset.wallet; $('#wallet').value = w; apply(samples[w]); toast('Sample investigation loaded') });
+            $('#demoBtn').onclick = () => { $('#wallet').value = '0x71c9...9F21'; $('#amount').value = '2.45 ETH'; $('#description').value = 'Victim reports funds sent to a suspected investment scam wallet.'; apply(samples['0x71c9...9F21']); $('#report').scrollIntoView({ behavior: 'smooth' }); toast('Demo case loaded') };
+            $('#scanForm').onsubmit = e => { e.preventDefault(); const raw = $('#wallet').value.trim(); let d = samples[raw] || { score: Math.floor(45 + Math.random() * 48), type: raw.toLowerCase().includes('contract') ? 'Contract' : 'EOA', hops: Math.floor(2 + Math.random() * 10), entity: 'Unknown / pending', conf: Math.floor(72 + Math.random() * 24) + '%', risk: 'ANALYSIS READY' }; apply(d); $('#results').style.display = 'block'; setTimeout(() => $('#results').scrollIntoView({ behavior: 'smooth' }), 100); toast('Blockchain analysis completed · demo data') };
+            const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') }), { threshold: .12 }); $$('.reveal').forEach(x => io.observe(x));
+            // lightweight Three.js hero object
+            if (window.THREE) { const c = $('#webgl'), scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, .1, 100); cam.position.z = 5; const r = new THREE.WebGLRenderer({ alpha: true, antialias: true }); r.setPixelRatio(Math.min(devicePixelRatio, 1.7)); r.setSize(innerWidth, innerHeight); c.appendChild(r.domElement); const g = new THREE.Group(); scene.add(g); const geo = new THREE.IcosahedronGeometry(1.35, 1); const mat = new THREE.MeshBasicMaterial({ color: 0x55d6ff, wireframe: true, transparent: true, opacity: .28 }); const mesh = new THREE.Mesh(geo, mat); g.add(mesh); const inner = new THREE.Mesh(new THREE.IcosahedronGeometry(.72, 1), new THREE.MeshBasicMaterial({ color: 0xf0a24b, wireframe: true, transparent: true, opacity: .18 })); g.add(inner); const pts = new THREE.Points(new THREE.BufferGeometry().setFromPoints(Array.from({ length: 180 }, () => new THREE.Vector3((Math.random() - .5) * 7, (Math.random() - .5) * 7, (Math.random() - .5) * 4))), new THREE.PointsMaterial({ color: 0x55d6ff, size: .018, transparent: true, opacity: .45 })); scene.add(pts); let mx = 0, my = 0; addEventListener('mousemove', e => { mx = (e.clientX / innerWidth - .5) * .7; my = (e.clientY / innerHeight - .5) * .35 }); function loop() { requestAnimationFrame(loop); g.rotation.y += .0025; g.rotation.x += (my - g.rotation.x) * .01; g.rotation.y += (mx - g.rotation.y) * .01; inner.rotation.z -= .004; pts.rotation.y -= .0005; r.render(scene, cam) } loop(); addEventListener('resize', () => { cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); r.setSize(innerWidth, innerHeight) }) }
+        })();
+    </script>
+</body>
+
+</html>
 <script src="js/app.js"></script>
