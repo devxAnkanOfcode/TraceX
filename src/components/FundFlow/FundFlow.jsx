@@ -9,56 +9,38 @@ function FundFlow() {
 
     const [selectedNode, setSelectedNode] = useState(null);
 
-    const flowNodes = [
-        {
-            id: "victim",
-            type: "ORIGIN",
-            label: analysis ? "Investigated Wallet" : "Victim Wallet",
-            address: analysis?.wallet ?? "0x7A...92F",
-            icon: "V",
-            incoming: "—",
-            outgoing: "0.84 ETH",
-            transactions: 1,
-            entity: "Reported Wallet",
-            status: "Reported",
-        },
-        {
-            id: "wallet1",
-            type: "HOP 01",
-            label: "Wallet 1",
-            address: "0x3B...81C",
-            icon: "W1",
-            incoming: "0.84 ETH",
-            outgoing: "0.81 ETH",
-            transactions: 7,
-            entity: "Unknown Wallet",
-            status: "Suspicious",
-        },
-        {
-            id: "wallet2",
-            type: "HOP 02",
-            label: "Wallet 2",
-            address: "0xA4...72D",
-            icon: "W2",
-            incoming: "0.81 ETH",
-            outgoing: "0.79 ETH",
-            transactions: 12,
-            entity: "Unknown Wallet",
-            status: "Suspicious",
-        },
-        {
-            id: "exchange",
-            type: "DESTINATION",
-            label: "Crypto Exchange",
-            address: "Potential Entity",
-            icon: "EX",
-            incoming: "0.79 ETH",
-            outgoing: "—",
-            transactions: 27,
-            entity: "Potential Exchange",
-            status: "High Risk",
-        },
-    ];
+    const flowNodes = analysis?.fundFlow?.nodes?.map((node, index) => ({
+        id: node.id,
+        type: node.type,
+        label: node.label,
+        address: node.address,
+        icon:
+            index === 0
+                ? "V"
+                : index === 1
+                    ? "W1"
+                    : index === 2
+                        ? "W2"
+                        : "EX",
+
+        incoming:
+            index === 0
+                ? "—"
+                : analysis?.fundFlow?.edges?.[index - 1]
+                    ? `${analysis.fundFlow.edges[index - 1].amount} ${analysis.fundFlow.edges[index - 1].asset}`
+                    : "—",
+
+        outgoing:
+            analysis?.fundFlow?.edges?.[index]
+                ? `${analysis.fundFlow.edges[index].amount} ${analysis.fundFlow.edges[index].asset}`
+                : "—",
+
+        transactions:
+            node.transactions ?? 0,
+
+        entity: node.entity,
+        status: node.status,
+    })) ?? [];
 
     return (
         <section className="fund-flow" id="fund-flow">
@@ -124,11 +106,9 @@ function FundFlow() {
                                 {index < flowNodes.length - 1 && (
                                     <div className="flow-line">
                                         <span>
-                                            {index === 0
-                                                ? "0.84 ETH"
-                                                : index === 1
-                                                    ? "0.81 ETH"
-                                                    : "0.79 ETH"}
+                                            {analysis?.fundFlow?.edges?.[index]
+                                                ? `${analysis.fundFlow.edges[index].amount} ${analysis.fundFlow.edges[index].asset}`
+                                                : "—"}
                                         </span>
                                     </div>
                                 )}

@@ -316,7 +316,7 @@ function Investigation() {
                                         key={index}
                                     >
                                         <span>⚠</span>
-                                        <p>{indicator}</p>
+                                        <p>{indicator.description}</p>
                                     </div>
                                 ))}
 
