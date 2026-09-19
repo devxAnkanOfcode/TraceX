@@ -1,20 +1,54 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 import Investigation from "./components/Investigation/Investigation.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import FundFlow from "./components/FundFlow/FundFlow.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import PageTransition from "./PageTransition.jsx";
+import ScrollReveal from "./ScrollReveal.jsx";
+
+function InvestigationPage() {
+  return (
+    <PageTransition>
+      <>
+        <Navbar />
+
+        <Hero />
+
+        <ScrollReveal>
+          <Investigation />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Dashboard />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <FundFlow />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Footer />
+        </ScrollReveal>
+      </>
+    </PageTransition>
+  );
+}
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Investigation />
-      <Dashboard />
-      <FundFlow />
-      <Footer />
-    </>
+    <BrowserRouter basename="/TraceX">
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+
+        <Route
+          path="/investigate"
+          element={<InvestigationPage />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
