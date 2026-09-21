@@ -1051,7 +1051,7 @@ img {
 .faq-answer {
   padding: 0 50px 24px 4px;
 
-  animation: faqReveal 0.25s ease;
+  animation: faqReveal 0.50s ease;
 }
 
 .faq-answer p {
