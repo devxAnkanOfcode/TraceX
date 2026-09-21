@@ -5,6 +5,7 @@ import Hero from "./components/Hero/Hero.jsx";
 import Investigation from "./components/Investigation/Investigation.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import FundFlow from "./components/FundFlow/FundFlow.jsx";
+import NetworkMap from "./components/NetworkMap/NetworkMap.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import PageTransition from "./PageTransition.jsx";
 import ScrollReveal from "./ScrollReveal.jsx";
@@ -30,6 +31,10 @@ function InvestigationPage() {
         </ScrollReveal>
 
         <ScrollReveal>
+          <NetworkMap />
+        </ScrollReveal>
+
+        <ScrollReveal>
           <Footer />
         </ScrollReveal>
       </>
@@ -43,10 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        <Route
-          path="/investigate"
-          element={<InvestigationPage />}
-        />
+        <Route path="/investigate" element={<InvestigationPage />} />
       </Routes>
     </BrowserRouter>
   );
